@@ -1,0 +1,199 @@
+{
+  "users": {
+    "sample_user_1": {
+      "lineUserId": "sample_user_1",
+      "displayName": "田中太郎",
+      "role": "admin",
+      "isActive": true,
+      "joinedAt": "2024-01-01T00:00:00.000Z",
+      "lastSeenAt": "2024-01-15T10:00:00.000Z"
+    },
+    "sample_user_2": {
+      "lineUserId": "sample_user_2",
+      "displayName": "佐藤花子",
+      "role": "staff",
+      "isActive": true,
+      "joinedAt": "2024-01-05T00:00:00.000Z",
+      "lastSeenAt": "2024-01-15T09:30:00.000Z"
+    },
+    "sample_user_3": {
+      "lineUserId": "sample_user_3",
+      "displayName": "鈴木次郎",
+      "role": "staff",
+      "isActive": true,
+      "joinedAt": "2024-01-10T00:00:00.000Z",
+      "lastSeenAt": "2024-01-14T18:00:00.000Z"
+    }
+  },
+  "positions": [
+    {
+      "id": "pos_01",
+      "name": "洗い場",
+      "emoji": "🧽",
+      "sortOrder": 1
+    },
+    {
+      "id": "pos_02",
+      "name": "1レーン",
+      "emoji": "🍽️",
+      "sortOrder": 2
+    },
+    {
+      "id": "pos_03",
+      "name": "2レーン",
+      "emoji": "🍖",
+      "sortOrder": 3
+    },
+    {
+      "id": "pos_04",
+      "name": "ホール",
+      "emoji": "🏃‍♀️",
+      "sortOrder": 4
+    }
+  ],
+  "shifts": {
+    "2024-01-15": [
+      {
+        "id": "shift_1705315200000_abc123def",
+        "userId": "sample_user_1",
+        "positionId": "pos_04",
+        "startTime": "09:00",
+        "endTime": "17:00",
+        "breakMinutes": 60,
+        "status": "confirmed",
+        "createdAt": "2024-01-10T00:00:00.000Z"
+      },
+      {
+        "id": "shift_1705315200001_def456ghi",
+        "userId": "sample_user_2",
+        "positionId": "pos_01",
+        "startTime": "10:00",
+        "endTime": "18:00",
+        "breakMinutes": 60,
+        "status": "confirmed",
+        "createdAt": "2024-01-10T00:00:00.000Z"
+      },
+      {
+        "id": "shift_1705315200002_ghi789jkl",
+        "userId": "sample_user_3",
+        "positionId": "pos_02",
+        "startTime": "11:00",
+        "endTime": "19:00",
+        "breakMinutes": 60,
+        "status": "confirmed",
+        "createdAt": "2024-01-10T00:00:00.000Z"
+      }
+    ],
+    "2024-01-16": [
+      {
+        "id": "shift_1705401600000_jkl012mno",
+        "userId": "sample_user_2",
+        "positionId": "pos_04",
+        "startTime": "09:00",
+        "endTime": "17:00",
+        "breakMinutes": 60,
+        "status": "confirmed",
+        "createdAt": "2024-01-10T00:00:00.000Z"
+      },
+      {
+        "id": "shift_1705401600001_mno345pqr",
+        "userId": "sample_user_3",
+        "positionId": "pos_01",
+        "startTime": "10:00",
+        "endTime": "18:00",
+        "breakMinutes": 60,
+        "status": "draft",
+        "createdAt": "2024-01-10T00:00:00.000Z"
+      }
+    ]
+  },
+  "shiftRequests": {
+    "2024-02": {
+      "sample_user_2": {
+        "month": "2024-02",
+        "userId": "sample_user_2",
+        "requestText": "@シフトボット 来月希望です。平日9時から17時、土日休み希望",
+        "parsedData": {
+          "weekdays": {
+            "available": true,
+            "preferredStart": "09:00",
+            "preferredEnd": "17:00"
+          },
+          "weekends": {
+            "available": false
+          }
+        },
+        "submittedAt": "2024-01-20T10:00:00.000Z",
+        "status": "submitted"
+      }
+    }
+  },
+  "sharedNotices": [
+    {
+      "id": "notice_1705315200000_abc123",
+      "title": "2レーン食洗機故障",
+      "content": "2レーンの食洗機が故障中です。修理業者の手配済み、1月20日頃復旧予定。それまで1レーンで対応お願いします。",
+      "category": "equipment",
+      "priority": "high",
+      "startDate": "2024-01-15",
+      "endDate": "2024-01-20",
+      "isActive": true,
+      "createdBy": "sample_user_1",
+      "createdAt": "2024-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "notice_1705315200001_def456",
+      "title": "新メニュー導入",
+      "content": "1月20日より新メニュー「特製ハンバーグ」を追加します。調理手順はバックヤードに掲示予定。",
+      "category": "operation",
+      "priority": "medium",
+      "startDate": "2024-01-15",
+      "endDate": "2024-01-25",
+      "isActive": true,
+      "createdBy": "sample_user_1",
+      "createdAt": "2024-01-15T09:00:00.000Z"
+    }
+  ],
+  "dailyMessages": {
+    "2024-01-15": [
+      {
+        "id": "msg_1705315200000_abc123",
+        "userName": "佐藤花子",
+        "message": "おはようございます！今日もよろしくお願いします。",
+        "messageType": "line_import",
+        "isPrivate": false,
+        "createdAt": "2024-01-15T08:30:00.000Z",
+        "userId": "sample_user_2"
+      },
+      {
+        "id": "msg_1705315200001_def456",
+        "userName": "田中太郎",
+        "message": "食洗機の調子が悪いので、業者に連絡しました。",
+        "messageType": "admin_memo",
+        "isPrivate": false,
+        "createdAt": "2024-01-15T10:00:00.000Z",
+        "userId": "sample_user_1"
+      }
+    ]
+  },
+  "substituteRequests": [],
+  "settings": {
+    "storeName": "サンプル店",
+    "businessHours": "09:00-22:00",
+    "adminLineUserId": "sample_user_1",
+    "shiftDeadlineDay": 25,
+    "autoBreakEnabled": true,
+    "breakRules": {
+      "6hours": 45,
+      "8hours": 60
+    },
+    "timezone": "Asia/Tokyo"
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "lastUpdatedAt": "2024-01-15T12:00:00.000Z",
+    "totalUsers": 3,
+    "totalShifts": 5
+  }
+}
