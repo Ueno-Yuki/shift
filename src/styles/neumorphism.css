@@ -1,0 +1,168 @@
+/* ニューモーフィズムベースクラス */
+.neumorphic-base {
+  background: #f0f0f3;
+  border: none;
+  outline: none;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: #31344b;
+}
+
+/* バリエーション */
+.neumorphic-raised {
+  box-shadow: 
+    12px 12px 24px #d0d0d3,
+    -12px -12px 24px #ffffff;
+}
+
+.neumorphic-pressed {
+  box-shadow: 
+    inset 6px 6px 12px #d0d0d3,
+    inset -6px -6px 12px #ffffff;
+}
+
+.neumorphic-floating {
+  box-shadow: 
+    16px 16px 32px #d0d0d3,
+    -16px -16px 32px #ffffff;
+}
+
+.neumorphic-subtle {
+  box-shadow: 
+    6px 6px 12px #d0d0d3,
+    -6px -6px 12px #ffffff;
+}
+
+/* インタラクティブ要素 */
+.neumorphic-interactive {
+  cursor: pointer;
+  user-select: none;
+}
+
+.neumorphic-interactive:hover {
+  box-shadow: 
+    inset 3px 3px 8px #d0d0d3,
+    inset -3px -3px 8px #ffffff;
+  transform: translateY(1px);
+}
+
+.neumorphic-interactive:active {
+  box-shadow: 
+    inset 6px 6px 12px #d0d0d3,
+    inset -6px -6px 12px #ffffff;
+  transform: translateY(2px);
+}
+
+/* 無効状態 */
+.neumorphic-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* カラーバリエーション */
+.neumorphic-primary {
+  background: linear-gradient(145deg, #f0f0f3, #f5f5f8);
+}
+
+.neumorphic-secondary {
+  background: linear-gradient(145deg, #f5f5f8, #f0f0f3);
+}
+
+.neumorphic-surface {
+  background: linear-gradient(145deg, #f2f2f5, #f0f0f3);
+}
+
+/* サイズバリエーション */
+.neumorphic-sm {
+  border-radius: 8px;
+  box-shadow: 
+    4px 4px 8px #d0d0d3,
+    -4px -4px 8px #ffffff;
+}
+
+.neumorphic-md {
+  border-radius: 12px;
+  box-shadow: 
+    8px 8px 16px #d0d0d3,
+    -8px -8px 16px #ffffff;
+}
+
+.neumorphic-lg {
+  border-radius: 16px;
+  box-shadow: 
+    12px 12px 24px #d0d0d3,
+    -12px -12px 24px #ffffff;
+}
+
+/* 特殊効果 */
+.neumorphic-glow {
+  box-shadow: 
+    8px 8px 16px #d1d9e0,
+    -8px -8px 16px #ffffff,
+    0 0 20px rgba(66, 153, 225, 0.3);
+}
+
+.neumorphic-error {
+  box-shadow: 
+    8px 8px 16px #d1d9e0,
+    -8px -8px 16px #ffffff,
+    0 0 20px rgba(245, 101, 101, 0.3);
+}
+
+.neumorphic-success {
+  box-shadow: 
+    8px 8px 16px #d1d9e0,
+    -8px -8px 16px #ffffff,
+    0 0 20px rgba(72, 187, 120, 0.3);
+}
+
+/* アニメーション効果 */
+.neumorphic-pulse {
+  animation: neumorphic-pulse 2s infinite;
+}
+
+@keyframes neumorphic-pulse {
+  0%, 100% {
+    box-shadow: 
+      8px 8px 16px #d1d9e0,
+      -8px -8px 16px #ffffff;
+  }
+  50% {
+    box-shadow: 
+      12px 12px 24px #d1d9e0,
+      -12px -12px 24px #ffffff;
+  }
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+  .neumorphic-raised,
+  .neumorphic-floating {
+    box-shadow: 
+      4px 4px 8px #d1d9e0,
+      -4px -4px 8px #ffffff;
+  }
+  
+  .neumorphic-interactive:hover {
+    transform: none;
+  }
+}
+
+/* ダークモード対応（将来用） */
+@media (prefers-color-scheme: dark) {
+  .dark-mode .neumorphic-base {
+    background: #2d3748;
+  }
+  
+  .dark-mode .neumorphic-raised {
+    box-shadow: 
+      8px 8px 16px #1a202c,
+      -8px -8px 16px #4a5568;
+  }
+  
+  .dark-mode .neumorphic-pressed {
+    box-shadow: 
+      inset 4px 4px 8px #1a202c,
+      inset -4px -4px 8px #4a5568;
+  }
+}
