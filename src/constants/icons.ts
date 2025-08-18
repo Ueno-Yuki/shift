@@ -2,6 +2,7 @@ import {
   Calendar,
   Clock,
   ClipboardCheck,
+  Droplet,
   Users,
   Settings,
   Bell,
@@ -39,9 +40,9 @@ import {
   Bookmark,
   Tag,
   MapPin,
-  Coffee,
-  Utensils,
-  Car,
+  Store,
+  Fish,
+  Truck,
   Building,
   Sun,
   Moon,
@@ -117,12 +118,12 @@ export const ICONS = {
   
   // ポジション（シフト用）
   positions: {
-    Coffee,      // 洗い場
-    Utensils,    // レーン
-    Users,       // ホール
-    Building,    // 管理
-    Car,         // 配達
-    Shield       // セキュリティ
+    Droplet,      // 洗い場
+    Fish,         // レーン
+    Store,        // ホール
+    Building,     // 管理
+    Truck,        // 配送
+    Shield        // セキュリティ
   },
   
   // その他

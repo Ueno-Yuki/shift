@@ -29,26 +29,37 @@
     {
       "id": "pos_01",
       "name": "洗い場",
-      "emoji": "🧽",
       "sortOrder": 1
     },
     {
       "id": "pos_02",
       "name": "1レーン",
-      "emoji": "🍽️",
       "sortOrder": 2
     },
     {
       "id": "pos_03",
       "name": "2レーン",
-      "emoji": "🍖",
       "sortOrder": 3
     },
     {
       "id": "pos_04",
-      "name": "ホール",
-      "emoji": "🏃‍♀️",
+      "name": "3レーン",
       "sortOrder": 4
+    },
+    {
+      "id": "pos_05",
+      "name": "バック",
+      "sortOrder": 5
+    },
+    {
+      "id": "pos_06",
+      "name": "ホール",
+      "sortOrder": 6
+    },
+    {
+      "id": "pos_07",
+      "name": "配送",
+      "sortOrder": 7
     }
   ],
   "shifts": {
@@ -104,6 +115,48 @@
         "breakMinutes": 60,
         "status": "draft",
         "createdAt": "2024-01-10T00:00:00.000Z"
+      }
+    ],
+    "2025-08-18": [
+      {
+        "id": "shift_2025081800_abc123",
+        "userId": "sample_user_1",
+        "positionId": "pos_04",
+        "startTime": "07:00",
+        "endTime": "12:00",
+        "breakMinutes": 0,
+        "status": "confirmed",
+        "createdAt": "2025-08-18T00:00:00.000Z"
+      },
+      {
+        "id": "shift_2025081801_def456",
+        "userId": "sample_user_2",
+        "positionId": "pos_01",
+        "startTime": "07:30",
+        "endTime": "11:30",
+        "breakMinutes": 0,
+        "status": "confirmed",
+        "createdAt": "2025-08-18T00:00:00.000Z"
+      },
+      {
+        "id": "shift_2025081802_ghi789",
+        "userId": "sample_user_3",
+        "positionId": "pos_02",
+        "startTime": "08:00",
+        "endTime": "12:00",
+        "breakMinutes": 30,
+        "status": "draft",
+        "createdAt": "2025-08-18T00:00:00.000Z"
+      },
+      {
+        "id": "shift_2025081803_jkl012",
+        "userId": "sample_user_1",
+        "positionId": "pos_03",
+        "startTime": "09:00",
+        "endTime": "11:00",
+        "breakMinutes": 0,
+        "status": "draft",
+        "createdAt": "2025-08-18T00:00:00.000Z"
       }
     ]
   },

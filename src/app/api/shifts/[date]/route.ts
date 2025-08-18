@@ -36,7 +36,8 @@ export async function GET(
       dayShifts,
       activeNotices,
       dayMessages,
-      allPositions
+      allPositions,
+      allUsers
     ] = await Promise.all([
       db.getShifts(date).catch(err => {
         console.error('Error getting shifts:', err);
@@ -53,10 +54,14 @@ export async function GET(
       db.getPositions().catch(err => {
         console.error('Error getting positions:', err);
         return [];
+      }),
+      db.getUsers().catch(err => {
+        console.error('Error getting users:', err);
+        return [];
       })
     ]);
 
-    console.log(`Found ${dayShifts.length} shifts, ${activeNotices.length} notices, ${dayMessages.length} messages, ${allPositions.length} positions`);
+    console.log(`Found ${dayShifts.length} shifts, ${activeNotices.length} notices, ${dayMessages.length} messages, ${allPositions.length} positions, ${allUsers.length} users`);
 
     // シフトをエンリッチ（ユーザー情報とポジション情報を追加）
     let enrichedShifts = [];
@@ -74,6 +79,7 @@ export async function GET(
         notices: activeNotices,
         messages: dayMessages,
         positions: allPositions,
+        users: allUsers,
         date
       }
     });

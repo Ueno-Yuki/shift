@@ -21,6 +21,12 @@ export default function ShiftPage() {
     emoji: string;
     sortOrder: number;
   }>>([]);
+  const [users, setUsers] = useState<Array<{
+    lineUserId: string;
+    displayName: string;
+    role: string;
+    isActive: boolean;
+  }>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,6 +60,7 @@ export default function ShiftPage() {
         setNotices(result.data.notices || []);
         setMessages(result.data.messages || []);
         setPositions(result.data.positions || []);
+        setUsers(result.data.users || []);
         console.log(`Loaded: ${result.data.shifts?.length || 0} shifts, ${result.data.positions?.length || 0} positions`);
       } else {
         throw new Error(result.error || 'データの取得に失敗しました');
@@ -154,11 +161,16 @@ export default function ShiftPage() {
   }
 
   return (
-    <div className="container" style={{ 
+    <div style={{ 
       minHeight: '100vh',
-      paddingTop: '24px',
-      paddingBottom: '48px'
+      display: 'flex',
+      flexDirection: 'column'
     }}>
+      <div className="container" style={{ 
+        flex: 1,
+        paddingTop: '10px',
+        paddingBottom: '24px'
+      }}>
       {/* 共有事項（重要な場合は上部に表示） */}
       {notices.some(notice => notice.priority === 'urgent' || notice.priority === 'high') && (
         <NoticeDisplay notices={notices.filter(notice => 
@@ -171,6 +183,7 @@ export default function ShiftPage() {
         date={date}
         shifts={shifts}
         positions={positions}
+        users={users}
         onDateChange={handleDateChange}
       />
 
@@ -188,15 +201,17 @@ export default function ShiftPage() {
           date={date}
         />
       )}
+      </div>
 
       {/* フッター */}
       <div style={{
         textAlign: 'center',
-        marginTop: '48px',
         padding: '24px',
         color: '#64748b',
-        fontSize: '12px',
-        borderTop: '1px solid #e2e8f0'
+        fontSize: '10px',
+        borderTop: '1px solid #e2e8f0',
+        backgroundColor: 'var(--nm-bg)',
+        marginTop: 'auto'
       }}>
         シフト管理システム v1.0.0
         <br />

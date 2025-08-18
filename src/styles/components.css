@@ -311,6 +311,206 @@
   opacity: 0.3;
 }
 
+/* ShiftTable用スタイル */
+.shift-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(208, 208, 211, 0.3);
+  border-radius: 12px;
+  box-shadow: 
+    2px 2px 4px var(--nm-shadow-dark),
+    -2px -2px 4px var(--nm-shadow-light);
+}
+
+.shift-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.shift-table-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nm-text-primary);
+  margin: 0;
+}
+
+.shift-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--nm-bg);
+  box-shadow: 
+    inset 4px 4px 8px var(--nm-shadow-dark),
+    inset -4px -4px 8px var(--nm-shadow-light);
+}
+
+.shift-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.shift-table-header-cell {
+  background: var(--nm-bg);
+  color: var(--nm-text-primary);
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 4px;
+  border-bottom: 2px solid var(--nm-shadow-dark);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.name-header {
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  left: 0;
+  z-index: 11;
+}
+
+.position-header {
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  left: 60px;
+  z-index: 11;
+}
+
+.time-header {
+  min-width: 40px;
+  font-size: 10px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.shift-table-row {
+  transition: all 0.2s ease;
+}
+
+.shift-table-row:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.shift-table-cell {
+  padding: 6px 4px;
+  text-align: center;
+  border-bottom: 1px solid rgba(208, 208, 211, 0.2);
+  transition: all 0.2s ease;
+}
+
+.name-cell {
+  background: var(--nm-bg);
+  font-weight: 500;
+  color: var(--nm-text-primary);
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  border-right: 1px solid var(--nm-shadow-dark);
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  font-size: 9px;
+}
+
+.position-cell {
+  background: var(--nm-bg);
+  position: sticky;
+  left: 60px;
+  z-index: 5;
+  border-right: 1px solid var(--nm-shadow-dark);
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  font-size: 9px;
+}
+
+.position-name {
+  font-size: 10px;
+  color: var(--nm-text-secondary);
+}
+
+.time-cell {
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 40px;
+  position: relative;
+}
+
+.time-bar {
+  width: 80%;
+  height: 16px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: var(--nm-text-primary);
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.shift-table-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--nm-text-muted);
+  font-style: italic;
+  font-size: 14px;
+}
+
+.shift-ampm-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--nm-bg);
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 
+    inset 2px 2px 4px var(--nm-shadow-dark),
+    inset -2px -2px 4px var(--nm-shadow-light);
+  margin-right: auto;
+}
+
+.shift-mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--nm-bg);
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 
+    inset 2px 2px 4px var(--nm-shadow-dark),
+    inset -2px -2px 4px var(--nm-shadow-light);
+  margin-left: auto;
+}
+
+.toggle-button {
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 500;
+  border: none;
+  background: var(--nm-bg);
+  color: var(--nm-text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    2px 2px 4px var(--nm-shadow-dark),
+    -2px -2px 4px var(--nm-shadow-light);
+}
+
+.toggle-button.active {
+  color: var(--nm-text-primary);
+  box-shadow: 
+    inset 2px 2px 4px var(--nm-shadow-dark),
+    inset -2px -2px 4px var(--nm-shadow-light);
+}
+
+.toggle-button:hover {
+  color: var(--nm-text-secondary);
+}
+
 /* ============================================= */
 /* タブレット用メディアクエリ (768px以上) */
 /* ============================================= */
@@ -429,6 +629,88 @@
     height: 40px;
     font-size: 15px;
   }
+
+  /* ShiftTable用スタイル */
+  .shift-table-header {
+    justify-content: space-between;
+  }
+  
+  .shift-table-title {
+    font-size: 20px;
+  }
+  
+  .toggle-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .shift-table {
+    font-size: 14px;
+  }
+
+  .shift-table-header-cell {
+    padding: 12px 6px;
+  }
+
+  .name-header {
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    font-size: 12px;
+  }
+
+  .position-header {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    left: 70px;
+    font-size: 12px;
+  }
+
+  .time-header {
+    min-width: 50px;
+    font-size: 12px;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+  }
+
+  .name-cell {
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    font-size: 12px;
+  }
+
+  .position-cell {
+    left: 70px;
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    font-size: 12px;
+  }
+
+  .position-name {
+    font-size: 12px;
+  }
+
+  .time-cell {
+    min-width: 50px;
+  }
+
+  .time-bar {
+    height: 18px;
+    border-radius: 9px;
+  }
+
+  .legend-item {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 /* ============================================= */
@@ -500,5 +782,85 @@
     width: 44px;
     height: 44px;
     font-size: 16px;
+  }
+
+  /* ShiftTable用スタイル */
+  .shift-table-title {
+    font-size: 24px;
+  }
+  
+  .toggle-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .shift-table {
+    font-size: 16px;
+    min-width: 800px;
+  }
+
+  .shift-table-header-cell {
+    padding: 16px 8px;
+  }
+
+  .name-header {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  .position-header {
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    left: 80px;
+  }
+
+  .time-header {
+    min-width: 60px;
+    font-size: 14px;
+  }
+
+  .shift-table-cell {
+    padding: 8px 6px;
+  }
+
+  .name-cell {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    font-size: 13px;
+  }
+
+  .position-cell {
+    left: 80px;
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    font-size: 13px;
+  }
+
+  .position-name {
+    font-size: 14px;
+  }
+
+  .time-cell {
+    min-width: 60px;
+    font-size: 16px;
+  }
+
+  .time-bar {
+    height: 20px;
+    border-radius: 10px;
+  }
+
+  .legend-item {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .legend-dot {
+    width: 14px;
+    height: 14px;
   }
 }

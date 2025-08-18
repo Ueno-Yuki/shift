@@ -180,6 +180,11 @@ export class JSONDatabase {
     return this.data!.users[lineUserId];
   }
 
+  async getUsers(): Promise<User[]> {
+    await this.load();
+    return Object.values(this.data!.users);
+  }
+
   async getActiveUsers(): Promise<User[]> {
     await this.load();
     return Object.values(this.data!.users).filter(user => user.isActive);

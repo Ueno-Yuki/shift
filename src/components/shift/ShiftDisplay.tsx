@@ -3,6 +3,7 @@ import { ICONS } from '@/constants/icons';
 import NeumorphicCard from '@/components/base/NeumorphicCard';
 import NeumorphicButton from '@/components/base/NeumorphicButton';
 import Calendar from '@/components/calendar/Calendar';
+import ShiftTable from '@/components/shift/ShiftTable';
 import { EnrichedShift } from '@/types/database';
 
 interface ShiftDisplayProps {
@@ -14,6 +15,12 @@ interface ShiftDisplayProps {
     emoji: string;
     sortOrder: number;
   }>;
+  users: Array<{
+    lineUserId: string;
+    displayName: string;
+    role: string;
+    isActive: boolean;
+  }>;
   onDateChange: (date: string) => void;
 }
 
@@ -21,6 +28,7 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
   date,
   shifts,
   positions,
+  users,
   onDateChange
 }) => {
   const [currentDate, setCurrentDate] = useState(date);
@@ -123,55 +131,13 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
       </NeumorphicCard>
 
       {/* シフト表示 */}
-      <div>
-        {positions.map(position => {
-          const positionShifts = groupedShifts[position.id] || [];
-          
-          return (
-            <div key={position.id} className="shift-section">
-              <NeumorphicCard padding="lg" hoverable>
-                <div className="shift-position-header">
-                  <span className="position-icon">{position.emoji}</span>
-                  <span className="position-title">{position.name}</span>
-                  <span className="position-count">
-                    ({positionShifts.length}名)
-                  </span>
-                </div>
-
-                {positionShifts.length > 0 ? (
-                  positionShifts.map(shift => (
-                    <div key={shift.id} className="neumorphic-base neumorphic-raised p-md mb-sm">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-medium text-primary">
-                            {shift.user?.displayName || 'Unknown User'}
-                          </div>
-                          <div className="text-sm text-muted">
-                            {shift.startTime} - {shift.endTime}
-                            {shift.breakMinutes > 0 && ` (休憩 ${shift.breakMinutes}分)`}
-                          </div>
-                        </div>
-                        <div className={`p-xs text-xs font-medium ${
-                          shift.status === 'confirmed' ? 'neumorphic-success' : 
-                          shift.status === 'draft' ? 'neumorphic-warning' : 
-                          shift.status === 'preview' ? 'neumorphic-secondary' : 'text-muted'
-                        }`}>
-                          {shift.status === 'confirmed' ? '確定' : 
-                           shift.status === 'draft' ? '下書き' : 
-                           shift.status === 'preview' ? 'プレビュー' : '固定'}
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="empty-state">
-                    {position.name}にシフトが登録されていません
-                  </div>
-                )}
-              </NeumorphicCard>
-            </div>
-          );
-        })}
+      <div className="shift-section">
+        <ShiftTable
+          date={currentDate}
+          shifts={shifts}
+          positions={positions} 
+          users={users}
+        />
       </div>
 
       {/* カレンダーモーダル */}
