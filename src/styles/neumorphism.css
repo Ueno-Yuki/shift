@@ -1,168 +1,224 @@
-/* ニューモーフィズムベースクラス */
-.neumorphic-base {
-  background: #f0f0f3;
-  border: none;
-  outline: none;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: #31344b;
+/* モバイルファースト ニューモーフィズムスタイル */
+:root {
+  /* 統一された背景色 */
+  --nm-bg: #f0f0f3;
+  
+  /* シャドウ色 */
+  --nm-shadow-light: #ffffff;
+  --nm-shadow-dark: #d0d0d3;
+  
+  /* テキストカラー */
+  --nm-text-primary: #31344b;
+  --nm-text-secondary: #718096;
+  --nm-text-muted: #a0aec0;
 }
 
-/* バリエーション */
+/* ベースクラス - すべての要素で統一 */
+.neumorphic-base {
+  background: var(--nm-bg);
+  color: var(--nm-text-primary);
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* モバイル用：小さめのシャドウで軽量 */
 .neumorphic-raised {
   box-shadow: 
-    12px 12px 24px #d0d0d3,
-    -12px -12px 24px #ffffff;
+    4px 4px 8px var(--nm-shadow-dark),
+    -4px -4px 8px var(--nm-shadow-light);
 }
 
 .neumorphic-pressed {
   box-shadow: 
-    inset 6px 6px 12px #d0d0d3,
-    inset -6px -6px 12px #ffffff;
-}
-
-.neumorphic-floating {
-  box-shadow: 
-    16px 16px 32px #d0d0d3,
-    -16px -16px 32px #ffffff;
-}
-
-.neumorphic-subtle {
-  box-shadow: 
-    6px 6px 12px #d0d0d3,
-    -6px -6px 12px #ffffff;
+    inset 3px 3px 6px var(--nm-shadow-dark),
+    inset -3px -3px 6px var(--nm-shadow-light);
 }
 
 /* インタラクティブ要素 */
 .neumorphic-interactive {
   cursor: pointer;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.neumorphic-interactive:hover {
+/* モバイル用：タッチ時の視覚的フィードバック */
+.neumorphic-interactive:active {
   box-shadow: 
-    inset 3px 3px 8px #d0d0d3,
-    inset -3px -3px 8px #ffffff;
+    inset 4px 4px 8px var(--nm-shadow-dark),
+    inset -4px -4px 8px var(--nm-shadow-light);
   transform: translateY(1px);
 }
 
-.neumorphic-interactive:active {
-  box-shadow: 
-    inset 6px 6px 12px #d0d0d3,
-    inset -6px -6px 12px #ffffff;
-  transform: translateY(2px);
+/* ボタンスタイル - モバイル最適化 */
+.neumorphic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 12px;
+  min-height: 44px; /* Appleのタッチターゲット推奨サイズ */
+  padding: 12px 16px;
+  gap: 8px;
+  font-size: 16px; /* iOS Safariでズームを防ぐ */
 }
 
-/* 無効状態 */
-.neumorphic-disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
+/* カードスタイル - モバイル最適化 */
+.neumorphic-card {
+  border-radius: 16px;
+  padding: 16px;
 }
 
-/* カラーバリエーション */
-.neumorphic-primary {
-  background: linear-gradient(145deg, #f0f0f3, #f5f5f8);
-}
-
-.neumorphic-secondary {
-  background: linear-gradient(145deg, #f5f5f8, #f0f0f3);
-}
-
-.neumorphic-surface {
-  background: linear-gradient(145deg, #f2f2f5, #f0f0f3);
-}
-
-/* サイズバリエーション */
+/* モバイル用サイズバリエーション */
 .neumorphic-sm {
   border-radius: 8px;
-  box-shadow: 
-    4px 4px 8px #d0d0d3,
-    -4px -4px 8px #ffffff;
+  padding: 8px 12px;
+  min-height: 36px;
+  font-size: 14px;
 }
 
 .neumorphic-md {
   border-radius: 12px;
-  box-shadow: 
-    8px 8px 16px #d0d0d3,
-    -8px -8px 16px #ffffff;
+  padding: 12px 16px;
+  min-height: 44px;
+  font-size: 16px;
 }
 
 .neumorphic-lg {
   border-radius: 16px;
-  box-shadow: 
-    12px 12px 24px #d0d0d3,
-    -12px -12px 24px #ffffff;
+  padding: 16px 24px;
+  min-height: 52px;
+  font-size: 18px;
 }
 
-/* 特殊効果 */
-.neumorphic-glow {
-  box-shadow: 
-    8px 8px 16px #d1d9e0,
-    -8px -8px 16px #ffffff,
-    0 0 20px rgba(66, 153, 225, 0.3);
+/* カラーバリエーション */
+.neumorphic-primary {
+  color: #3b82f6;
 }
 
-.neumorphic-error {
-  box-shadow: 
-    8px 8px 16px #d1d9e0,
-    -8px -8px 16px #ffffff,
-    0 0 20px rgba(245, 101, 101, 0.3);
+.neumorphic-secondary {
+  color: #6366f1;
 }
 
 .neumorphic-success {
-  box-shadow: 
-    8px 8px 16px #d1d9e0,
-    -8px -8px 16px #ffffff,
-    0 0 20px rgba(72, 187, 120, 0.3);
+  color: #10b981;
 }
 
-/* アニメーション効果 */
-.neumorphic-pulse {
-  animation: neumorphic-pulse 2s infinite;
+.neumorphic-warning {
+  color: #f59e0b;
 }
 
-@keyframes neumorphic-pulse {
-  0%, 100% {
-    box-shadow: 
-      8px 8px 16px #d1d9e0,
-      -8px -8px 16px #ffffff;
-  }
-  50% {
-    box-shadow: 
-      12px 12px 24px #d1d9e0,
-      -12px -12px 24px #ffffff;
-  }
+.neumorphic-error {
+  color: #ef4444;
 }
 
-/* レスポンシブ調整 */
-@media (max-width: 768px) {
-  .neumorphic-raised,
-  .neumorphic-floating {
+/* 無効状態 */
+.neumorphic-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* タブレット用調整 */
+@media (min-width: 768px) {
+  /* タブレットでは少し大きめのシャドウ */
+  .neumorphic-raised {
     box-shadow: 
-      4px 4px 8px #d1d9e0,
-      -4px -4px 8px #ffffff;
+      6px 6px 12px var(--nm-shadow-dark),
+      -6px -6px 12px var(--nm-shadow-light);
   }
   
+  .neumorphic-pressed {
+    box-shadow: 
+      inset 4px 4px 8px var(--nm-shadow-dark),
+      inset -4px -4px 8px var(--nm-shadow-light);
+  }
+  
+  /* ホバー効果を追加 */
   .neumorphic-interactive:hover {
+    box-shadow: 
+      inset 2px 2px 4px var(--nm-shadow-dark),
+      inset -2px -2px 4px var(--nm-shadow-light);
+  }
+  
+  /* カードのパディング増加 */
+  .neumorphic-card {
+    padding: 20px;
+  }
+}
+
+/* デスクトップ用調整 */
+@media (min-width: 1024px) {
+  /* デスクトップでは最大のシャドウ */
+  .neumorphic-raised {
+    box-shadow: 
+      8px 8px 16px var(--nm-shadow-dark),
+      -8px -8px 16px var(--nm-shadow-light);
+  }
+  
+  .neumorphic-pressed {
+    box-shadow: 
+      inset 6px 6px 12px var(--nm-shadow-dark),
+      inset -6px -6px 12px var(--nm-shadow-light);
+  }
+  
+  /* カードのパディング最大 */
+  .neumorphic-card {
+    padding: 24px;
+  }
+  
+  /* ボタンサイズ調整 */
+  .neumorphic-button {
+    padding: 12px 24px;
+  }
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+  .neumorphic-base,
+  .neumorphic-interactive {
+    transition: none;
+  }
+  
+  .neumorphic-interactive:hover,
+  .neumorphic-interactive:active {
     transform: none;
   }
 }
 
-/* ダークモード対応（将来用） */
-@media (prefers-color-scheme: dark) {
-  .dark-mode .neumorphic-base {
-    background: #2d3748;
+/* ハイコントラストモード対応 */
+@media (prefers-contrast: high) {
+  :root {
+    --nm-shadow-dark: #b0b0b3;
+  }
+}
+
+/* フォーカス表示 - アクセシビリティ重要 */
+.neumorphic-interactive:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* タッチデバイス用最適化 */
+@media (pointer: coarse) {
+  .neumorphic-button {
+    min-height: 48px; /* タッチに最適な高さ */
   }
   
-  .dark-mode .neumorphic-raised {
-    box-shadow: 
-      8px 8px 16px #1a202c,
-      -8px -8px 16px #4a5568;
+  .neumorphic-sm {
+    min-height: 40px;
   }
   
-  .dark-mode .neumorphic-pressed {
+  .neumorphic-lg {
+    min-height: 56px;
+  }
+}
+
+/* 細かいポインタ（マウス）用 */
+@media (pointer: fine) {
+  .neumorphic-interactive:hover {
     box-shadow: 
-      inset 4px 4px 8px #1a202c,
-      inset -4px -4px 8px #4a5568;
+      inset 1px 1px 2px var(--nm-shadow-dark),
+      inset -1px -1px 2px var(--nm-shadow-light);
   }
 }

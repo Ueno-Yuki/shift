@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { DESIGN_TOKENS } from '@/constants/design-tokens';
 import { ICONS } from '@/constants/icons';
 import NeumorphicCard from '@/components/base/NeumorphicCard';
 import NeumorphicButton from '@/components/base/NeumorphicButton';
+import Calendar from '@/components/calendar/Calendar';
 import { EnrichedShift } from '@/types/database';
 
 interface ShiftDisplayProps {
@@ -24,6 +24,7 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
   onDateChange
 }) => {
   const [currentDate, setCurrentDate] = useState(date);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
     setCurrentDate(date);
@@ -38,19 +39,33 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
   };
 
   const navigateToToday = () => {
-    const today = new Date().toISOString().split('T')[0];
-    setCurrentDate(today);
-    onDateChange(today);
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+    setCurrentDate(todayString);
+    onDateChange(todayString);
+  };
+
+  const handleCalendarToggle = () => {
+    setShowCalendar(!showCalendar);
+  };
+
+  const handleDateSelect = (selectedDate: string) => {
+    setCurrentDate(selectedDate);
+    onDateChange(selectedDate);
+    setShowCalendar(false);
   };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      weekday: 'long'
-    });
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+    const weekday = weekdays[date.getDay()];
+    return `${year}/${month}/${day}（${weekday}）`;
   };
 
 
@@ -64,89 +79,26 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
     return grouped;
   };
 
-  const headerStyles: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: DESIGN_TOKENS.spacing.lg,
-    padding: DESIGN_TOKENS.spacing.md
-  };
-
-  const titleStyles: React.CSSProperties = {
-    fontSize: DESIGN_TOKENS.typography.fontSize.xl,
-    fontWeight: DESIGN_TOKENS.typography.fontWeight.bold,
-    color: DESIGN_TOKENS.colors.text.primary
-  };
-
-  const navigationStyles: React.CSSProperties = {
-    display: 'flex',
-    gap: DESIGN_TOKENS.spacing.sm,
-    alignItems: 'center'
-  };
-
-  const positionSectionStyles: React.CSSProperties = {
-    marginBottom: DESIGN_TOKENS.spacing.lg
-  };
-
-  const positionHeaderStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: DESIGN_TOKENS.spacing.sm,
-    marginBottom: DESIGN_TOKENS.spacing.md,
-    fontSize: DESIGN_TOKENS.typography.fontSize.lg,
-    fontWeight: DESIGN_TOKENS.typography.fontWeight.semibold,
-    color: DESIGN_TOKENS.colors.text.primary
-  };
-
-  const shiftItemStyles: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: DESIGN_TOKENS.spacing.md,
-    marginBottom: DESIGN_TOKENS.spacing.sm,
-    fontSize: DESIGN_TOKENS.typography.fontSize.sm,
-    backgroundColor: DESIGN_TOKENS.colors.background.elevated,
-    borderRadius: DESIGN_TOKENS.borderRadius.sm,
-    boxShadow: DESIGN_TOKENS.shadows.neumorphic.subtle
-  };
-
-  const statusBadgeStyles = (status: string): React.CSSProperties => {
-    const statusColors = {
-      'confirmed': DESIGN_TOKENS.colors.accent.success,
-      'draft': DESIGN_TOKENS.colors.accent.warning,
-      'preview': DESIGN_TOKENS.colors.accent.secondary,
-      'locked': DESIGN_TOKENS.colors.text.muted
-    };
-
-    return {
-      padding: `${DESIGN_TOKENS.spacing.xs} ${DESIGN_TOKENS.spacing.sm}`,
-      borderRadius: DESIGN_TOKENS.borderRadius.sm,
-      fontSize: DESIGN_TOKENS.typography.fontSize.xs,
-      fontWeight: DESIGN_TOKENS.typography.fontWeight.medium,
-      color: DESIGN_TOKENS.colors.background.primary,
-      backgroundColor: statusColors[status as keyof typeof statusColors] || DESIGN_TOKENS.colors.text.muted
-    };
-  };
-
-  const emptyStateStyles: React.CSSProperties = {
-    textAlign: 'center',
-    padding: DESIGN_TOKENS.spacing.xl,
-    color: DESIGN_TOKENS.colors.text.muted,
-    fontSize: DESIGN_TOKENS.typography.fontSize.sm
-  };
+  // CSSクラスで代替するため、インラインスタイルを削除
 
   const groupedShifts = groupShiftsByPosition();
 
   return (
     <div>
       {/* ヘッダー */}
-      <NeumorphicCard padding="md" className="mb-6">
-        <div style={headerStyles}>
-          <div>
-            <h1 style={titleStyles}>{formatDate(currentDate)}</h1>
+      <NeumorphicCard padding="xs" className="mb-lg">
+        <div className="shift-header">
+          <div className="shift-title-section">
+            <h1 className="shift-title">{formatDate(currentDate)}</h1>
           </div>
           
-          <div style={navigationStyles}>
+          <div className="shift-navigation">
+            <NeumorphicButton
+              size="sm"
+              color="secondary"
+              icon={ICONS.time.Calendar}
+              onClick={handleCalendarToggle}
+            />
             <NeumorphicButton
               size="sm"
               color="secondary"
@@ -176,37 +128,43 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
           const positionShifts = groupedShifts[position.id] || [];
           
           return (
-            <div key={position.id} style={positionSectionStyles}>
+            <div key={position.id} className="shift-section">
               <NeumorphicCard padding="lg" hoverable>
-                <div style={positionHeaderStyles}>
-                  <span>{position.emoji}</span>
-                  <span>{position.name}</span>
-                  <span style={{ fontSize: DESIGN_TOKENS.typography.fontSize.sm, color: DESIGN_TOKENS.colors.text.muted }}>
+                <div className="shift-position-header">
+                  <span className="position-icon">{position.emoji}</span>
+                  <span className="position-title">{position.name}</span>
+                  <span className="position-count">
                     ({positionShifts.length}名)
                   </span>
                 </div>
 
                 {positionShifts.length > 0 ? (
                   positionShifts.map(shift => (
-                    <div key={shift.id} style={shiftItemStyles}>
-                      <div>
-                        <div style={{ fontWeight: DESIGN_TOKENS.typography.fontWeight.medium }}>
-                          {shift.user?.displayName || 'Unknown User'}
+                    <div key={shift.id} className="neumorphic-base neumorphic-raised p-md mb-sm">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <div className="font-medium text-primary">
+                            {shift.user?.displayName || 'Unknown User'}
+                          </div>
+                          <div className="text-sm text-muted">
+                            {shift.startTime} - {shift.endTime}
+                            {shift.breakMinutes > 0 && ` (休憩 ${shift.breakMinutes}分)`}
+                          </div>
                         </div>
-                        <div style={{ color: DESIGN_TOKENS.colors.text.muted }}>
-                          {shift.startTime} - {shift.endTime}
-                          {shift.breakMinutes > 0 && ` (休憩 ${shift.breakMinutes}分)`}
+                        <div className={`p-xs text-xs font-medium ${
+                          shift.status === 'confirmed' ? 'neumorphic-success' : 
+                          shift.status === 'draft' ? 'neumorphic-warning' : 
+                          shift.status === 'preview' ? 'neumorphic-secondary' : 'text-muted'
+                        }`}>
+                          {shift.status === 'confirmed' ? '確定' : 
+                           shift.status === 'draft' ? '下書き' : 
+                           shift.status === 'preview' ? 'プレビュー' : '固定'}
                         </div>
-                      </div>
-                      <div style={statusBadgeStyles(shift.status)}>
-                        {shift.status === 'confirmed' ? '確定' : 
-                         shift.status === 'draft' ? '下書き' : 
-                         shift.status === 'preview' ? 'プレビュー' : '固定'}
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div style={emptyStateStyles}>
+                  <div className="empty-state">
                     {position.name}にシフトが登録されていません
                   </div>
                 )}
@@ -215,6 +173,15 @@ const ShiftDisplay: React.FC<ShiftDisplayProps> = ({
           );
         })}
       </div>
+
+      {/* カレンダーモーダル */}
+      {showCalendar && (
+        <Calendar
+          selectedDate={currentDate}
+          onDateSelect={handleDateSelect}
+          onClose={() => setShowCalendar(false)}
+        />
+      )}
     </div>
   );
 };

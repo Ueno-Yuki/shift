@@ -1,6 +1,9 @@
 /* ニューモーフィズムスタイル読み込み */
 @import url('./neumorphism.css');
 
+/* レスポンシブコンポーネントスタイル読み込み */
+@import url('./components.css');
+
 /* リセット */
 *,
 *::before,
